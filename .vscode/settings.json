@@ -1,0 +1,7 @@
+{
+	// format on save
+	"editor.formatOnSave": true,
+	// always use tabs of size 8
+	"editor.tabSize": 8,
+	"editor.insertSpaces": false,
+}

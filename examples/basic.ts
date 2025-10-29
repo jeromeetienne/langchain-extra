@@ -1,0 +1,60 @@
+// node imports
+import Fs from "node:fs";
+
+// npm imports
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai"
+
+// local imports
+import LocalFileCache from "../src/cache/local_file_cache.js";
+
+const __dirname = new URL('.', import.meta.url).pathname;
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//	
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+async function main() {
+	const __dirname = new URL('.', import.meta.url).pathname;
+	const filePath = `${__dirname}/my_local_file_cache.json`
+	const localFileCache = new LocalFileCache(filePath);
+	await localFileCache.init();
+
+	const llm = new ChatGoogleGenerativeAI({
+		model: "gemini-2.5-flash",
+		temperature: 0,
+		maxRetries: 2,
+		// other params...
+		cache: localFileCache,
+	})
+
+	console.time("aiMsg");
+	const aiMsg = await llm.invoke([
+		[
+			"system",
+			"You are a helpful assistant that translates English to French. Translate the user sentence.",
+		],
+		["human", "I love programming."],
+	])
+
+	console.log(aiMsg.text)
+	console.timeEnd("aiMsg");
+
+
+	console.time("aiMsg2");
+	const aiMsg2 = await llm.invoke([
+		[
+			"system",
+			"You are a helpful assistant that translates English to French. Translate the user sentence.",
+		],
+		["human", "I love programming."],
+	])
+
+	console.log(aiMsg2.text)
+	console.timeEnd("aiMsg2");
+}
+
+// run main if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`)
+	main()

@@ -1,0 +1,30 @@
+{
+  "name": "langchain-extra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromeetienne/langchain-extra.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeromeetienne/langchain-extra/issues"
+  },
+  "homepage": "https://github.com/jeromeetienne/langchain-extra#readme",
+  "dependencies": {
+    "@langchain/core": "^1.0.2",
+    "langchain": "^1.0.2"
+  },
+  "devDependencies": {
+    "@langchain/google-genai": "^1.0.0",
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3"
+  }
+}
