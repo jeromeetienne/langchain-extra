@@ -9,7 +9,7 @@ import { Generation } from "@langchain/core/outputs";
 
 const GLOBAL_CACHE = new Map<string, any>();
 
-export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
+export class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 	private cache: Map<string, T>;
 	private filePath: string;
 
