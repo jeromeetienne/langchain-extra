@@ -1,13 +1,8 @@
-// node imports
-import Fs from "node:fs";
-
 // npm imports
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai"
 
 // local imports
 import LocalFileCache from "../src/cache/local_file_cache.js";
-
-const __dirname = new URL('.', import.meta.url).pathname;
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////

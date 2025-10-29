@@ -1,5 +1,5 @@
 // node imports
-import Fs from "fs";
+import Fs from "node:fs";
 
 // npm imports
 import { BaseCache, serializeGeneration, deserializeStoredGeneration } from "@langchain/core/caches";
@@ -40,7 +40,7 @@ export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 	/**
 	 * Saves the current cache to a local file in JSON format.
 	 */
-	async saveToFile(): Promise<void> {
+	async _saveToFile(): Promise<void> {
 		// serialize the cache into an array of [key, serializedGenerations]
 		const cacheArray: [string, any][] = Array.from(this.cache.entries())
 		const serializedCacheArray: [string, any][] = []
@@ -82,6 +82,6 @@ export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 	async update(prompt: string, llmKey: string, value: T): Promise<void> {
 		this.cache.set(this.keyEncoder(prompt, llmKey), value);
 		// update cache on disk
-		await this.saveToFile();
+		await this._saveToFile();
 	}
 }
