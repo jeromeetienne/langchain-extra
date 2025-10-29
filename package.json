@@ -6,6 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsc",
+		"clean": "rm -rf ./dist",
+		"publish": "npm run build && npm publish --access public",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -21,7 +23,8 @@
 	"homepage": "https://github.com/jeromeetienne/langchain-extra#readme",
 	"dependencies": {
 		"@langchain/core": "^1.0.2",
-		"langchain": "^1.0.2"
+		"langchain": "^1.0.2",
+		"langchain-extra": "^1.0.0"
 	},
 	"devDependencies": {
 		"@langchain/google-genai": "^1.0.0",
