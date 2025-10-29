@@ -19,9 +19,9 @@ export class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 		this.filePath = filePath;
 	}
 	async init(): Promise<void> {
+		const fileExists = await Fs.promises.access(this.filePath).then(() => true).catch(() => false);
 
 		// if file exists, load its content into the cache
-		const fileExists = await Fs.promises.access(this.filePath).then(() => true).catch(() => false);
 		if (fileExists) {
 			const data = await Fs.promises.readFile(this.filePath, 'utf-8');
 			const parsedData: [string, any][] = JSON.parse(data);
