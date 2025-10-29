@@ -19,6 +19,8 @@ export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 		this.filePath = filePath;
 	}
 	async init(): Promise<void> {
+
+		// if file exists, load its content into the cache
 		const fileExists = await Fs.promises.access(this.filePath).then(() => true).catch(() => false);
 		if (fileExists) {
 			const data = await Fs.promises.readFile(this.filePath, 'utf-8');
@@ -33,8 +35,6 @@ export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 				this.cache.set(cache_key, generations);
 			}
 		}
-		// console.log(`fileExists: ${fileExists}`);
-		// console.log('cache after load', JSON.stringify(Array.from(this.cache.entries()), null, 2));
 	}
 
 	/**
@@ -53,11 +53,8 @@ export default class LocalFileCache<T = Generation[]> extends BaseCache<T> {
 			serializedCacheArray.push([cache_key, serializedGenerations]);
 		}
 
-		// console.log('cache before save', JSON.stringify(serializedCacheArray, null, 2));
-
 		// write the cache to a file
 		const data = JSON.stringify(serializedCacheArray, null, 2);
-		// console.log(`Saving cache to file: ${this.filePath}`);
 		await Fs.promises.writeFile(this.filePath, data, 'utf-8');
 	}
 
