@@ -4,4 +4,6 @@
 	// always use tabs of size 8
 	"editor.tabSize": 8,
 	"editor.insertSpaces": false,
+	// enforce the tab indentation at 8 in every file
+	"editor.detectIndentation": false
 }
